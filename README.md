@@ -162,26 +162,7 @@ Barcha chartlar zamonaviy animatsiyalar bilan ishlaydi:
 - Saytni yangilaganda ma'lumotlar saqlanib qoladi (HTML ichida)
 - Backend integratsiyasi uchun API endpoint'larni qo'shishingiz kerak
 
-## 🚀 Deployment
 
-### Vercel'ga yuklash:
-
-1. GitHub repository yarating
-2. Vercel'ga ulang
-3. `index.html` fayli avtomatik ochiladi
-4. Tizim tayyor!
-
-### Lokal ishga tushirish:
-
-```bash
-# Oddiy HTTP server bilan
-python -m http.server 8000
-
-# Yoki Node.js bilan
-npx http-server
-```
-
-Keyin brauzerda `http://localhost:8000` manzilini oching.
 
 ## 📞 Yordam
 
@@ -191,5 +172,5 @@ Agar muammo bo'lsa yoki savol bo'lsa, loyiha muallifiga murojaat qiling.
 
 **Muallif:** Yoqubov Shehroz  
 **Versiya:** 1.0.0  
-**Sana:** 2024
+**Sana:** 2025/12/23
 
