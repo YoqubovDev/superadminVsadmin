@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Kirish</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md mx-auto px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            <!-- Logo va sarlavha -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-green-600 to-blue-600 text-white flex items-center justify-center font-bold text-2xl mx-auto mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">Admin Panel</h1>
+                <p class="text-sm text-gray-500">Panel turini tanlang</p>
+            </div>
+
+            <!-- Tugmalar -->
+            <div class="space-y-4">
+                <!-- Admin tugmasi -->
+                <a href="admin.html" class="block w-full">
+                    <button class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center space-x-3">
+                        <i class="fas fa-user-tie text-xl"></i>
+                        <span>Admin</span>
+                    </button>
+                </a>
+
+                <!-- Super Admin tugmasi -->
+                <a href="superadmin.html" class="block w-full">
+                    <button class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center space-x-3">
+                        <i class="fas fa-crown text-xl"></i>
+                        <span>Super Admin</span>
+                    </button>
+                </a>
+            </div>
+
+            <!-- Qo'shimcha ma'lumot -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <p class="text-xs text-center text-gray-500">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Iltimos, o'z panel turini tanlang
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

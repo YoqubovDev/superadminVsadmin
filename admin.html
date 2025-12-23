@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script>
+        window.APP_CONFIG = {
+            defaultUserId: 1,
+            allowedUserIds: [1],
+            lockRoleSwitcher: true
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
+            <div class="px-6 py-5 border-b border-gray-200">
+                <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors" id="openProfileSettings">
+                    <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">Sh</div>
+                    <div>
+                        <p class="text-sm text-gray-500">Admin Panel</p>
+                        <p class="text-base font-semibold text-gray-800" id="profileName">Yoqubov Shehroz</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 px-3 py-4 space-y-1" id="sidebarNav">
+                <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-green-600 text-white font-semibold">
+                    <i class="fas fa-home"></i><span>Bosh sahifa</span>
+                </a>
+                <a href="#" data-target="studentSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
+                    <i class="fas fa-rocket"></i><span>Studentlar</span>
+                </a>
+            </nav>
+            <div class="px-3 py-4 border-t border-gray-200">
+                <button class="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-red-600 hover:bg-red-50">
+                    <i class="fas fa-sign-out-alt"></i><span>Chiqish</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="flex-1">
+            
+
+            <div class="p-6 space-y-6">
+                <!-- Dashboard Section -->
+                <div id="dashboardSection" class="section-block space-y-6">
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-gray-500">Umumiy pul miqdori</p>
+                                <p class="text-lg font-semibold text-gray-800">1,000,000,000 so'm</p>
+                            </div>
+                            <div class="text-green-600 text-xl"><i class="fas fa-coins"></i></div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-gray-500">Studentlar soni</p>
+                                <p class="text-lg font-semibold text-gray-800">1285</p>
+                            </div>
+                            <div class="text-purple-600 text-xl"><i class="fas fa-users"></i></div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                            <h3 class="text-base font-semibold text-gray-800 mb-3">Umumiy pull diagrammasi (Oylar bo‘yicha)</h3>
+                            <canvas id="investLine" height="220"></canvas>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                            <h3 class="text-base font-semibold text-gray-800 mb-3">Toshkent Shaxar va viloyatlar bo‘yicha taqsimoti (Loyihalar bo‘yicha)</h3>
+                            <div class="w-full flex justify-center">
+                                <canvas id="avtobilimPie" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bar chart section -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+                        <h3 class="text-base font-semibold text-gray-800 mb-3 flex items-center space-x-2">
+                            <span class="text-amber-500"><i class="fas fa-trophy"></i></span>
+                            <span>TOP-5 o'quv markazlari (Studentlar soni bo'yicha)</span>
+                        </h3>
+                        <div class="w-full" style="height:280px;">
+                            <canvas id="topBar"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Student table -->
+                <div id="studentSection" class="section-block bg-white rounded-xl shadow-sm border border-gray-200 p-4 hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-xs text-gray-500">Bosh sahifa / Studentlar</p>
+                            <h3 class="text-lg font-semibold text-gray-800">Studentlar ro'yxati</h3>
+                        </div>
+                        <button id="openCreateStudentBtn" class="px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"><i class="fas fa-plus mr-2"></i>Yangi student</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead class="bg-gray-50 text-gray-700">
+                                <tr>
+                                    <th class="px-4 py-2 text-left">ID</th>
+                                    <th class="px-4 py-2 text-left">Ism</th>
+                                    <th class="px-4 py-2 text-left">Telefon</th>
+                                    <th class="px-4 py-2 text-left">Parol</th>
+                                    <th class="px-4 py-2 text-left">Admin nomi</th>
+                                    <th class="px-4 py-2 text-left">Status</th>
+                                    <th class="px-4 py-2 text-left">Ro'yxatdan o'tgan sana</th>
+                                    <th class="px-4 py-2 text-left">O'zgarishlar foizi</th>
+                                    <th class="px-4 py-2 text-left">Amallar</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <tr class="student-row" data-id="s1" data-changes-count="0">
+                                    <td class="px-4 py-2 text-gray-700">1</td>
+                                    <td class="px-4 py-2 font-medium text-gray-900">Aziza Karimova</td>
+                                    <td class="px-4 py-2 text-gray-700">+998900001001</td>
+                                    <td class="px-4 py-2 text-gray-700">password123</td>
+                                    <td class="px-4 py-2 text-gray-700">Ali Valiyev</td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2 text-gray-700">2024-02-01</td>
+                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-4 py-2 space-x-2">
+                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    </td>
+                                </tr>
+                                <tr class="student-row" data-id="s2" data-changes-count="0">
+                                    <td class="px-4 py-2 text-gray-700">2</td>
+                                    <td class="px-4 py-2 font-medium text-gray-900">Bekzod Xolmatov</td>
+                                    <td class="px-4 py-2 text-gray-700">+998900001002</td>
+                                    <td class="px-4 py-2 text-gray-700">password456</td>
+                                    <td class="px-4 py-2 text-gray-700">Sardor Karimov</td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2 text-gray-700">2024-03-12</td>
+                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-4 py-2 space-x-2">
+                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    </td>
+                                </tr>
+                                <tr class="student-row" data-id="s3" data-changes-count="0">
+                                    <td class="px-4 py-2 text-gray-700">3</td>
+                                    <td class="px-4 py-2 font-medium text-gray-900">Diyor Abdulhayev</td>
+                                    <td class="px-4 py-2 text-gray-700">+998900001003</td>
+                                    <td class="px-4 py-2 text-gray-700">password789</td>
+                                    <td class="px-4 py-2 text-gray-700">Dilshod Rahimov</td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2 text-gray-700">2024-01-25</td>
+                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-4 py-2 space-x-2">
+                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    </td>
+                                </tr>
+                                <tr class="student-row" data-id="s4" data-changes-count="0">
+                                    <td class="px-4 py-2 text-gray-700">4</td>
+                                    <td class="px-4 py-2 font-medium text-gray-900">Madina Rasulova</td>
+                                    <td class="px-4 py-2 text-gray-700">+998900001004</td>
+                                    <td class="px-4 py-2 text-gray-700">password321</td>
+                                    <td class="px-4 py-2 text-gray-700">Olimjon Toshmatov</td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs">Bloklangan</span></td>
+                                    <td class="px-4 py-2 text-gray-700">2024-03-05</td>
+                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-4 py-2 space-x-2">
+                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    </td>
+                                </tr>
+                                <tr class="student-row" data-id="s5" data-changes-count="0">
+                                    <td class="px-4 py-2 text-gray-700">5</td>
+                                    <td class="px-4 py-2 font-medium text-gray-900">Sabrina Ergasheva</td>
+                                    <td class="px-4 py-2 text-gray-700">+998900001005</td>
+                                    <td class="px-4 py-2 text-gray-700">password654</td>
+                                    <td class="px-4 py-2 text-gray-700">Javohir Ismoilov</td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2 text-gray-700">2024-04-10</td>
+                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-4 py-2 space-x-2">
+                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex items-center justify-between mt-3 text-xs text-gray-600">
+                        <p>Jami 5 ta student</p>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-2 py-1 border rounded text-gray-500 hover:bg-gray-100">1</button>
+                            <select class="border rounded px-2 py-1 text-gray-700">
+                                <option>10 / page</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Student Modal -->
+    <div id="createStudentOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-xs text-gray-500">Yangi student yaratish</p>
+                    <h3 class="text-xl font-semibold text-gray-800">Yangi student</h3>
+                </div>
+                <button id="closeCreateStudent" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="createStudentForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ism</label>
+                    <input type="text" id="createStudentName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                    <input type="tel" id="createStudentPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Parol</label>
+                    <input type="text" id="createStudentPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Admin nomi</label>
+                    <select id="createStudentAdminName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Admin tanlang</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ro'yxatdan o'tgan sana</label>
+                    <input type="date" id="createStudentCreatedDate" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select id="createStudentStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Aktiv</option>
+                        <option>Bloklangan</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelCreateStudent" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Yaratish</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Settings Modal -->
+    <div id="profileSettingsOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-xs text-gray-500">Profil sozlamalari</p>
+                    <h3 class="text-xl font-semibold text-gray-800">Profil ma'lumotlarini tahrirlash</h3>
+                </div>
+                <button id="closeProfileSettings" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="profileSettingsForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ism</label>
+                    <input type="text" id="profileNameInput" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                    <input type="tel" id="profilePhoneInput" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Eski parol</label>
+                    <input type="password" id="profileOldPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Parolni o'zgartirish uchun kiriting">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Yangi parol</label>
+                    <input type="password" id="profileNewPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Yangi parolni kiriting">
+                </div>
+                <div class="flex items-center justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelProfileSettings" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="text-xs text-gray-500" id="editModalSubtitle">Admin ma'lumotlarini tahrirlash</p>
+                    <h3 class="text-xl font-semibold text-gray-800">Tahrirlash</h3>
+                </div>
+                <button id="closeEditUser" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="editUserForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ism</label>
+                    <input type="text" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
+                    <input type="tel" id="editPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Parol</label>
+                    <input type="text" id="editPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+               
+                <!-- Student fields -->
+                <div id="editStudentFields" style="display: none;">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Admin nomi</label>
+                        <select id="editAdminName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Admin tanlang</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Ro'yxatdan o'tgan sana</label>
+                        <input type="date" id="editCreatedDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select id="editStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Aktiv</option>
+                        <option>Bloklangan</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-end space-x-3 pt-2">
+                    <button type="button" id="cancelEditUser" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ctx = document.getElementById("investLine");
+            if (ctx) {
+                new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
+                        datasets: [{
+                            label: "Investitsiya",
+                            data: [45, 55, 52, 70, 90, 110, 125, 95, 135, 140, 155, 170],
+                            borderColor: "#22c55e",
+                            backgroundColor: "rgba(34,197,94,0.12)",
+                            tension: 0.35,
+                            fill: true,
+                            borderWidth: 2,
+                            pointRadius: 3,
+                            pointBackgroundColor: "#22c55e"
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { display: true, color: "#e5e7eb" }, ticks: { color: "#4b5563" } },
+                            x: { grid: { display: false }, ticks: { color: "#4b5563" } }
+                        }
+                    }
+                });
+            }
+
+            const pie = document.getElementById("avtobilimPie");
+            if (pie) {
+                new Chart(pie, {
+                    type: "doughnut",
+                    data: {
+                        labels: ["ShehrozAvtobilim", "Avtobilim", "avtotehnika", "Avtobotuz", "Boshqalar"],
+                        datasets: [{
+                            data: [22, 26, 16, 20, 16],
+                            backgroundColor: ["#10b981", "#06b6d4", "#22c55e", "#0ea5e9", "#fbbf24"]
+                        }]
+                    },
+                    options: { responsive: true, plugins: { legend: { position: "bottom" } }, cutout: "60%" }
+                });
+            }
+
+            // Sidebar smooth scroll
+            const sidebarNav = document.getElementById("sidebarNav");
+            const contentSections = document.querySelectorAll(".section-block");
+            if (sidebarNav) {
+                sidebarNav.querySelectorAll("[data-target]").forEach((link) => {
+                    link.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const targetId = link.getAttribute("data-target");
+                        const section = document.getElementById(targetId);
+                        if (section) {
+                            section.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                        sidebarNav.querySelectorAll("a").forEach((a) => a.classList.remove("bg-green-600", "text-white", "font-semibold"));
+                        link.classList.add("bg-green-600", "text-white", "font-semibold");
+                        
+                        // Show single section when sidebar item clicked; otherwise show all
+                        if (targetId === "adminSection" || targetId === "studentSection" || targetId === "dashboardSection") {
+                            contentSections.forEach((el) => el.classList.toggle("hidden", el.id !== targetId));
+                        } else {
+                            contentSections.forEach((el) => el.classList.remove("hidden"));
+                        }
+                    });
+                });
+            }
+
+            const bar = document.getElementById("topBar");
+            if (bar) {
+                new Chart(bar, {
+                    type: "bar",
+                    data: {
+                        labels: ["ShehrozAvtobilim", "Avtobilim", "avtotehnika", "Avtobotuz", "Boshqalar"],
+                        datasets: [{
+                            label: "Investitsiya",
+                            data: [320, 280, 250, 200, 180],
+                            backgroundColor: "#07a3e8",
+                            borderRadius: 6,
+                            barThickness: 45,
+                            maxBarThickness: 60
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: {
+                                grid: { color: "#e5e7eb" },
+                                ticks: { color: "#4b5563" },
+                                suggestedMin: 0,
+                                suggestedMax: 340
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: "#4b5563" }
+                            }
+                        },
+                        layout: { padding: { left: 10, right: 30, top: 10, bottom: 10 } }
+                    }
+                });
+            }
+
+            // Edit/Delete interactions for admin and student tables
+            const overlay = document.getElementById("editUserOverlay");
+            const editForm = document.getElementById("editUserForm");
+            let activeRow = null;
+            let currentTableType = null; // 'admin' or 'student'
+
+            function openAdminModal(row) {
+                activeRow = row;
+                currentTableType = 'admin';
+                const cells = row.querySelectorAll("td");
+                // Admin table structure: ID(0), Ism(1), Telefon(2), Parol(3), O'quv markaz nomi(4), Viloyat(5), Tuman(6), Status(7), Ro'yxatdan o'tgan(8), Oxirgi kirish(9), Tugash vaqti(10)
+                document.getElementById("editModalSubtitle").textContent = "Admin ma'lumotlarini tahrirlash";
+                document.getElementById("editName").value = cells[1].textContent.trim();
+                document.getElementById("editPhone").value = cells[2].textContent.trim();
+                document.getElementById("editPassword").value = cells[3].textContent.trim();
+                document.getElementById("editCenterName").value = cells[4].textContent.trim();
+                document.getElementById("editRegion").value = cells[5].textContent.trim();
+                document.getElementById("editDistrict").value = cells[6].textContent.trim();
+                
+                // Parse status from badge
+                const statusBadge = cells[7].querySelector("span");
+                const statusText = statusBadge ? statusBadge.textContent.trim() : "Aktiv";
+                document.getElementById("editStatus").value = statusText === "Bloklangan" ? "Bloklangan" : "Aktiv";
+                
+                // Parse date from YYYY-MM-DD format
+                const expiryDate = cells[10].textContent.trim();
+                document.getElementById("editExpiryDate").value = expiryDate || "";
+                
+                // Show admin fields, hide student fields
+                document.getElementById("editAdminFields").style.display = "block";
+                document.getElementById("editStudentFields").style.display = "none";
+                
+                overlay.classList.remove("hidden");
+                overlay.classList.add("flex");
+            }
+
+            function populateAdminSelect() {
+                const adminSelect = document.getElementById("editAdminName");
+                if (!adminSelect) return;
+                
+                // Clear existing options except the first one
+                adminSelect.innerHTML = '<option value="">Admin tanlang</option>';
+                
+                // Get current admin name from sidebar (admin panel owner)
+                const sidebarAdminName = document.querySelector("aside .text-base.font-semibold.text-gray-800");
+                const currentAdminName = sidebarAdminName ? sidebarAdminName.textContent.trim() : "";
+                
+                if (currentAdminName) {
+                    const option = document.createElement("option");
+                    option.value = currentAdminName;
+                    option.textContent = currentAdminName;
+                    adminSelect.appendChild(option);
+                }
+            }
+
+            function blockStudentsByAdmin(adminName) {
+                // Find all student rows and block those that belong to the blocked admin
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                studentRows.forEach((studentRow) => {
+                    const studentCells = studentRow.querySelectorAll("td");
+                    const studentAdminName = studentCells[4].textContent.trim(); // Admin nomi is in cell index 4
+                    
+                    if (studentAdminName === adminName) {
+                        const statusBadge = studentCells[5].querySelector("span"); // Status is in cell index 5
+                        if (statusBadge) {
+                            statusBadge.textContent = "Bloklangan";
+                            statusBadge.className = "px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs";
+                        }
+                    }
+                });
+            }
+
+            function unblockStudentsByAdmin(adminName) {
+                // Find all student rows and unblock those that belong to the unblocked admin
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                studentRows.forEach((studentRow) => {
+                    const studentCells = studentRow.querySelectorAll("td");
+                    const studentAdminName = studentCells[4].textContent.trim(); // Admin nomi is in cell index 4
+                    
+                    if (studentAdminName === adminName) {
+                        const statusBadge = studentCells[5].querySelector("span"); // Status is in cell index 5
+                        if (statusBadge) {
+                            statusBadge.textContent = "Aktiv";
+                            statusBadge.className = "px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs";
+                        }
+                    }
+                });
+            }
+
+            function checkExpiredAdmins() {
+                // Get all admin rows from the admin table
+                const adminRows = document.querySelectorAll("#adminSection .user-row");
+                const now = new Date();
+                
+                adminRows.forEach((adminRow) => {
+                    const adminCells = adminRow.querySelectorAll("td");
+                    const expiryDateStr = adminCells[10].textContent.trim(); // Tugash vaqti is in cell index 10
+                    const statusBadge = adminCells[7].querySelector("span"); // Status is in cell index 7
+                    const currentStatus = statusBadge ? statusBadge.textContent.trim() : "Aktiv";
+                    
+                    // Skip if no expiry date or already blocked
+                    if (!expiryDateStr || currentStatus === "Bloklangan") {
+                        return;
+                    }
+                    
+                    // Parse expiry date (format: YYYY-MM-DD)
+                    const expiryDate = new Date(expiryDateStr);
+                    
+                    // Check if expiry date has passed
+                    if (expiryDate < now) {
+                        // Block the admin
+                        const adminName = adminCells[1].textContent.trim(); // Ism is in cell index 1
+                        
+                        if (statusBadge) {
+                            statusBadge.textContent = "Bloklangan";
+                            statusBadge.className = "px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs";
+                        }
+                        
+                        // Block all students of this admin
+                        blockStudentsByAdmin(adminName);
+                        
+                        console.log(`Admin "${adminName}" vaqt o'tgani uchun avtomatik bloklandi`);
+                    }
+                });
+            }
+
+            function openStudentModal(row) {
+                activeRow = row;
+                currentTableType = 'student';
+                const cells = row.querySelectorAll("td");
+                // Student table structure: ID(0), Ism(1), Telefon(2), Parol(3), Admin nomi(4), Status(5), Ro'yxatdan o'tgan(6), O'zgarishlar foizi(7)
+                document.getElementById("editModalSubtitle").textContent = "Student ma'lumotlarini tahrirlash";
+                document.getElementById("editName").value = cells[1].textContent.trim();
+                document.getElementById("editPhone").value = cells[2].textContent.trim();
+                document.getElementById("editPassword").value = cells[3].textContent.trim();
+                
+                // Populate admin select dropdown
+                populateAdminSelect();
+                
+                // Set selected admin name
+                const currentAdminName = cells[4].textContent.trim();
+                document.getElementById("editAdminName").value = currentAdminName;
+                
+                // Parse status from badge
+                const statusBadge = cells[5].querySelector("span");
+                const statusText = statusBadge ? statusBadge.textContent.trim() : "Aktiv";
+                document.getElementById("editStatus").value = statusText === "Bloklangan" ? "Bloklangan" : "Aktiv";
+                
+                // Parse date from YYYY-MM-DD format
+                const createdDate = cells[6].textContent.trim();
+                document.getElementById("editCreatedDate").value = createdDate || "";
+                
+                // Show student fields, hide admin fields
+                document.getElementById("editAdminFields").style.display = "none";
+                document.getElementById("editStudentFields").style.display = "block";
+                
+                overlay.classList.remove("hidden");
+                overlay.classList.add("flex");
+            }
+
+            function calculateChangesPercentage(changesCount) {
+                // Maksimal o'zgarishlar soni 100 deb olinadi
+                const maxChanges = 100;
+                const percentage = Math.min((changesCount / maxChanges) * 100, 100);
+                return Math.round(percentage);
+            }
+
+            function getPercentageColorClass(percentage) {
+                if (percentage < 60) {
+                    return "bg-red-50 text-red-600"; // Qizil
+                } else if (percentage >= 70 && percentage < 88) {
+                    return "bg-yellow-50 text-yellow-600"; // Sariq
+                } else if (percentage >= 88) {
+                    return "bg-green-50 text-green-700"; // Yashil
+                } else {
+                    // 60-70 orasida - qizil
+                    return "bg-red-50 text-red-600";
+                }
+            }
+
+            function incrementStudentChangesCount(row) {
+                // Get current changes count from data attribute
+                let currentCount = parseInt(row.getAttribute("data-changes-count")) || 0;
+                currentCount++;
+                
+                // Update data attribute
+                row.setAttribute("data-changes-count", currentCount);
+                
+                // Calculate percentage
+                const percentage = calculateChangesPercentage(currentCount);
+                const colorClass = getPercentageColorClass(percentage);
+                
+                // Update display in table (cell index 7 for changes percentage)
+                const cells = row.querySelectorAll("td");
+                if (cells[7]) {
+                    cells[7].innerHTML = `<span class="px-2 py-1 rounded-full ${colorClass} text-xs font-semibold">${percentage}%</span>`;
+                }
+            }
+
+            function closeModal() {
+                overlay.classList.add("hidden");
+                overlay.classList.remove("flex");
+                activeRow = null;
+                currentTableType = null;
+            }
+
+            // Attach event listeners to edit buttons in admin table
+            document.querySelectorAll("#adminSection .editUserBtn").forEach((btn) => {
+                btn.addEventListener("click", () => openAdminModal(btn.closest(".user-row")));
+            });
+
+            // Attach event listeners to delete buttons in admin table
+            document.querySelectorAll("#adminSection .deleteUserBtn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const row = btn.closest(".user-row");
+                    const name = row.querySelectorAll("td")[1].textContent.trim();
+                    if (confirm(`"${name}" adminini o'chirmoqchimisiz?`)) {
+                        row.remove();
+                        // Update total count
+                        const totalText = document.querySelector("#adminSection .flex.items-center.justify-between.mt-3 p");
+                        if (totalText) {
+                            const remainingRows = document.querySelectorAll("#adminSection .user-row").length;
+                            totalText.textContent = `Jami ${remainingRows} ta admin`;
+                        }
+                    }
+                });
+            });
+
+            // Attach event listeners to edit buttons in student table
+            document.querySelectorAll("#studentSection .editStudentBtn").forEach((btn) => {
+                btn.addEventListener("click", () => openStudentModal(btn.closest(".student-row")));
+            });
+
+            // Attach event listeners to delete buttons in student table
+            document.querySelectorAll("#studentSection .deleteStudentBtn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const row = btn.closest(".student-row");
+                    const name = row.querySelectorAll("td")[1].textContent.trim();
+                    if (confirm(`"${name}" studentini o'chirmoqchimisiz?`)) {
+                        row.remove();
+                        // Update total count
+                        const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                        if (totalText) {
+                            const remainingRows = document.querySelectorAll("#studentSection .student-row").length;
+                            totalText.textContent = `Jami ${remainingRows} ta student`;
+                        }
+                    }
+                });
+            });
+
+            document.getElementById("closeEditUser").addEventListener("click", closeModal);
+            document.getElementById("cancelEditUser").addEventListener("click", closeModal);
+
+            editForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (!activeRow || !currentTableType) return;
+                const cells = activeRow.querySelectorAll("td");
+                
+                if (currentTableType === 'admin') {
+                    // Get admin name before updating
+                    const adminName = cells[1].textContent.trim();
+                    const oldStatusBadge = cells[7].querySelector("span");
+                    const oldStatus = oldStatusBadge ? oldStatusBadge.textContent.trim() : "Aktiv";
+                    const oldExpiryDate = cells[10].textContent.trim();
+                    
+                    // Update admin table cells
+                    cells[1].textContent = document.getElementById("editName").value.trim();
+                    cells[2].textContent = document.getElementById("editPhone").value.trim();
+                    cells[3].textContent = document.getElementById("editPassword").value.trim();
+                    cells[4].textContent = document.getElementById("editCenterName").value.trim();
+                    cells[5].textContent = document.getElementById("editRegion").value.trim();
+                    cells[6].textContent = document.getElementById("editDistrict").value.trim();
+                    
+                    // Update expiry date
+                    const newExpiryDate = document.getElementById("editExpiryDate").value;
+                    cells[10].textContent = newExpiryDate || "";
+                    
+                    // Check if expiry date was changed
+                    const expiryDateChanged = oldExpiryDate !== newExpiryDate;
+                    
+                    // If expiry date was changed, check if admin should be activated/deactivated
+                    let finalStatus = document.getElementById("editStatus").value;
+                    if (expiryDateChanged && newExpiryDate) {
+                        const expiryDateObj = new Date(newExpiryDate);
+                        const now = new Date();
+                        
+                        // If new expiry date is in the future and admin is blocked, activate them
+                        if (expiryDateObj > now && oldStatus === "Bloklangan") {
+                            finalStatus = "Aktiv";
+                        }
+                        // If new expiry date is in the past and admin is active, block them
+                        else if (expiryDateObj <= now && oldStatus === "Aktiv") {
+                            finalStatus = "Bloklangan";
+                        }
+                    }
+                    
+                    // Update status badge
+                    const statusBadge = cells[7].querySelector("span");
+                    if (statusBadge) {
+                        statusBadge.textContent = finalStatus;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${finalStatus === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                    }
+                    
+                    // If admin status changed to blocked, block all their students
+                    // If admin status changed to active, unblock all their students
+                    const updatedAdminName = cells[1].textContent.trim();
+                    if (oldStatus !== finalStatus) {
+                        if (finalStatus === "Bloklangan") {
+                            blockStudentsByAdmin(updatedAdminName);
+                        } else if (finalStatus === "Aktiv") {
+                            unblockStudentsByAdmin(updatedAdminName);
+                        }
+                    }
+                } else if (currentTableType === 'student') {
+                    // Check if any data changed before updating
+                    const oldName = cells[1].textContent.trim();
+                    const oldPhone = cells[2].textContent.trim();
+                    const oldPassword = cells[3].textContent.trim();
+                    const oldAdminName = cells[4].textContent.trim();
+                    const oldStatusBadge = cells[5].querySelector("span");
+                    const oldStatus = oldStatusBadge ? oldStatusBadge.textContent.trim() : "Aktiv";
+                    const oldCreatedDate = cells[6].textContent.trim();
+                    
+                    const newName = document.getElementById("editName").value.trim();
+                    const newPhone = document.getElementById("editPhone").value.trim();
+                    const newPassword = document.getElementById("editPassword").value.trim();
+                    const adminSelect = document.getElementById("editAdminName");
+                    const newAdminName = adminSelect ? adminSelect.options[adminSelect.selectedIndex].textContent : "";
+                    const newStatus = document.getElementById("editStatus").value;
+                    const newCreatedDate = document.getElementById("editCreatedDate").value;
+                    
+                    // Check if any field changed
+                    const hasChanges = oldName !== newName || 
+                                      oldPhone !== newPhone || 
+                                      oldPassword !== newPassword || 
+                                      oldAdminName !== newAdminName || 
+                                      oldStatus !== newStatus || 
+                                      oldCreatedDate !== newCreatedDate;
+                    
+                    // Update student table cells
+                    cells[1].textContent = newName;
+                    cells[2].textContent = newPhone;
+                    cells[3].textContent = newPassword;
+                    cells[4].textContent = newAdminName;
+                    
+                    // Update status badge
+                    const statusBadge = cells[5].querySelector("span");
+                    if (statusBadge) {
+                        statusBadge.textContent = newStatus;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${newStatus === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                    }
+                    
+                    // Update created date
+                    cells[6].textContent = newCreatedDate || "";
+                    
+                    // Increment changes count if any data changed
+                    if (hasChanges) {
+                        incrementStudentChangesCount(activeRow);
+                    }
+                }
+
+                closeModal();
+            });
+
+            // Check expired admins on page load
+            checkExpiredAdmins();
+            
+            // Check expired admins every minute (60000 milliseconds)
+            setInterval(checkExpiredAdmins, 60000);
+
+            // Admin creation is disabled for Admin panel - only Super Admin can create admins
+            
+            // Create Student Modal Functions
+            function openCreateStudentModal() {
+                document.getElementById("createStudentOverlay").classList.remove("hidden");
+                document.getElementById("createStudentOverlay").classList.add("flex");
+                // Reset form
+                document.getElementById("createStudentForm").reset();
+                // Populate admin select with only current admin (admin panel owner)
+                const adminSelect = document.getElementById("createStudentAdminName");
+                adminSelect.innerHTML = '<option value="">Admin tanlang</option>';
+                
+                // Get current admin name from sidebar
+                const sidebarAdminName = document.querySelector("aside .text-base.font-semibold.text-gray-800");
+                const currentAdminName = sidebarAdminName ? sidebarAdminName.textContent.trim() : "";
+                
+                if (currentAdminName) {
+                    const option = document.createElement("option");
+                    option.value = currentAdminName;
+                    option.textContent = currentAdminName;
+                    option.selected = true; // Auto-select current admin
+                    adminSelect.appendChild(option);
+                }
+                
+                // Set default date to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById("createStudentCreatedDate").value = today;
+            }
+
+            function closeCreateStudentModal() {
+                document.getElementById("createStudentOverlay").classList.add("hidden");
+                document.getElementById("createStudentOverlay").classList.remove("flex");
+                document.getElementById("createStudentForm").reset();
+            }
+
+            function getNextStudentId() {
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                let maxId = 0;
+                studentRows.forEach((row) => {
+                    const id = parseInt(row.querySelectorAll("td")[0].textContent.trim());
+                    if (id > maxId) maxId = id;
+                });
+                return maxId + 1;
+            }
+
+            // Event listeners for create student modal
+            document.getElementById("openCreateStudentBtn").addEventListener("click", openCreateStudentModal);
+            document.getElementById("closeCreateStudent").addEventListener("click", closeCreateStudentModal);
+            document.getElementById("cancelCreateStudent").addEventListener("click", closeCreateStudentModal);
+
+            // Create Student Form Submit
+            document.getElementById("createStudentForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById("createStudentName").value.trim();
+                const phone = document.getElementById("createStudentPhone").value.trim();
+                const password = document.getElementById("createStudentPassword").value.trim();
+                const adminSelect = document.getElementById("createStudentAdminName");
+                const adminName = adminSelect.options[adminSelect.selectedIndex].textContent;
+                const createdDate = document.getElementById("createStudentCreatedDate").value;
+                const status = document.getElementById("createStudentStatus").value;
+                
+                if (!adminName || adminName === "") {
+                    alert("Iltimos, adminni tanlang");
+                    return;
+                }
+                
+                // Get student table tbody
+                const studentTableBody = document.querySelector("#studentSection tbody");
+                const newId = getNextStudentId();
+                
+                // Create new row
+                const newRow = document.createElement("tr");
+                newRow.className = "student-row";
+                newRow.setAttribute("data-id", `s${newId}`);
+                newRow.setAttribute("data-changes-count", "0");
+                
+                const statusClass = status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600";
+                
+                newRow.innerHTML = `
+                    <td class="px-4 py-2 text-gray-700">${newId}</td>
+                    <td class="px-4 py-2 font-medium text-gray-900">${name}</td>
+                    <td class="px-4 py-2 text-gray-700">${phone}</td>
+                    <td class="px-4 py-2 text-gray-700">${password}</td>
+                    <td class="px-4 py-2 text-gray-700">${adminName}</td>
+                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full ${statusClass} text-xs">${status}</span></td>
+                    <td class="px-4 py-2 text-gray-700">${createdDate || ""}</td>
+                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                    <td class="px-4 py-2 space-x-2">
+                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
+                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                    </td>
+                `;
+                
+                studentTableBody.appendChild(newRow);
+                
+                // Attach event listeners to new buttons
+                newRow.querySelector(".editStudentBtn").addEventListener("click", () => openStudentModal(newRow));
+                newRow.querySelector(".deleteStudentBtn").addEventListener("click", () => {
+                    const rowName = newRow.querySelectorAll("td")[1].textContent.trim();
+                    if (confirm(`"${rowName}" studentini o'chirmoqchimisiz?`)) {
+                        newRow.remove();
+                        const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                        if (totalText) {
+                            const remainingRows = document.querySelectorAll("#studentSection .student-row").length;
+                            totalText.textContent = `Jami ${remainingRows} ta student`;
+                        }
+                    }
+                });
+                
+                // Update total count
+                const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                if (totalText) {
+                    const remainingRows = document.querySelectorAll("#studentSection .student-row").length;
+                    totalText.textContent = `Jami ${remainingRows} ta student`;
+                }
+                
+                closeCreateStudentModal();
+            });
+
+            // Profile Settings Functions
+            // Store current profile data
+            let currentProfileData = {
+                name: "Yoqubov Shehroz",
+                phone: "+998901234567"
+            };
+
+            function openProfileSettings() {
+                const overlay = document.getElementById("profileSettingsOverlay");
+                // Populate form with current data
+                document.getElementById("profileNameInput").value = currentProfileData.name;
+                document.getElementById("profilePhoneInput").value = currentProfileData.phone;
+                // Clear password fields
+                document.getElementById("profileOldPassword").value = "";
+                document.getElementById("profileNewPassword").value = "";
+                
+                overlay.classList.remove("hidden");
+                overlay.classList.add("flex");
+            }
+
+            function closeProfileSettings() {
+                const overlay = document.getElementById("profileSettingsOverlay");
+                overlay.classList.add("hidden");
+                overlay.classList.remove("flex");
+                document.getElementById("profileSettingsForm").reset();
+            }
+
+            // Event listeners for profile settings
+            document.getElementById("openProfileSettings").addEventListener("click", openProfileSettings);
+            document.getElementById("closeProfileSettings").addEventListener("click", closeProfileSettings);
+            document.getElementById("cancelProfileSettings").addEventListener("click", closeProfileSettings);
+
+            // Profile Settings Form Submit
+            document.getElementById("profileSettingsForm").addEventListener("submit", (e) => {
+                e.preventDefault();
+                
+                const newName = document.getElementById("profileNameInput").value.trim();
+                const newPhone = document.getElementById("profilePhoneInput").value.trim();
+                const oldPassword = document.getElementById("profileOldPassword").value.trim();
+                const newPassword = document.getElementById("profileNewPassword").value.trim();
+                
+                // Update profile data
+                currentProfileData.name = newName;
+                currentProfileData.phone = newPhone;
+                
+                // Update sidebar display
+                document.getElementById("profileName").textContent = newName;
+                
+                // If password fields are filled, update password
+                if (oldPassword && newPassword) {
+                    // Here you would typically validate old password and update new password
+                    // For now, we'll just show a success message
+                    alert("Parol muvaffaqiyatli yangilandi!");
+                }
+                
+                alert("Profil ma'lumotlari muvaffaqiyatli yangilandi!");
+                closeProfileSettings();
+            });
+        });
+    </script>
+</body>
+</html>
