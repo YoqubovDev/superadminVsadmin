@@ -19,20 +19,97 @@
         * {
             font-family: 'Inter', sans-serif;
         }
+        /* Mobile Sidebar Overlay */
+        .sidebar-overlay {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .sidebar-overlay {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 40;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s, visibility 0.3s;
+            }
+            .sidebar-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            aside {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                bottom: 0;
+                z-index: 50;
+                transition: left 0.3s ease;
+            }
+            aside.mobile-open {
+                left: 0;
+            }
+            main {
+                width: 100%;
+            }
+        }
+        /* Chart containers for mobile */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+        }
+        @media (min-width: 769px) {
+            .chart-container {
+                height: 220px;
+            }
+        }
+        .chart-container-pie {
+            position: relative;
+            width: 100%;
+            height: 280px;
+        }
+        @media (min-width: 769px) {
+            .chart-container-pie {
+                height: 350px;
+            }
+        }
+        .chart-container-bar {
+            position: relative;
+            width: 100%;
+            height: 220px;
+        }
+        @media (min-width: 769px) {
+            .chart-container-bar {
+                height: 280px;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <div class="flex min-h-screen">
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="fixed top-4 left-4 z-30 lg:hidden bg-white p-2 rounded-lg shadow-md text-gray-700 hover:bg-gray-100">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        
         <!-- Sidebar -->
-        <aside class="w-64 bg-white border-r border-gray-200 flex flex-col">
-            <div class="px-6 py-5 border-b border-gray-200">
-                <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors" id="openProfileSettings">
+        <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col">
+            <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
+                <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors flex-1" id="openProfileSettings">
                     <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">Sh</div>
                     <div>
                         <p class="text-sm text-gray-500">Admin Panel</p>
                         <p class="text-base font-semibold text-gray-800" id="profileName">Yoqubov Shehroz</p>
                     </div>
                 </div>
+                <!-- Mobile Close Button -->
+                <button id="mobileCloseBtn" class="lg:hidden text-gray-500 hover:text-gray-700 p-2">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
             <nav class="flex-1 px-3 py-4 space-y-1" id="sidebarNav">
                 <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-green-600 text-white font-semibold">
@@ -50,149 +127,163 @@
         </aside>
 
         <!-- Main -->
-        <main class="flex-1">
-            
+        <main class="flex-1 lg:ml-0">
+            <header id="topSection" class="h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 pt-16 lg:pt-0">
+                <div>
+                    <p class="text-xs text-gray-500">Bosh sahifa / Admin Dashboard</p>
+                    <h1 class="text-lg md:text-xl font-semibold text-gray-800">Admin Dashboard</h1>
+                </div>
+            </header>
 
-            <div class="p-6 space-y-6">
+            <div class="p-3 md:p-6 space-y-4 md:space-y-6">
                 <!-- Dashboard Section -->
-                <div id="dashboardSection" class="section-block space-y-6">
+                <div id="dashboardSection" class="section-block space-y-4 md:space-y-6">
                     <!-- KPI Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex items-center justify-between">
-                            <div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
+                            <div class="flex-1">
                                 <p class="text-xs text-gray-500">Umumiy pul miqdori</p>
-                                <p class="text-lg font-semibold text-gray-800">1,000,000,000 so'm</p>
+                                <p class="text-base md:text-lg font-semibold text-gray-800">1,000,000,000 so'm</p>
                             </div>
-                            <div class="text-green-600 text-xl"><i class="fas fa-coins"></i></div>
+                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-coins"></i></div>
                         </div>
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 flex items-center justify-between">
-                            <div>
-                                <p class="text-xs text-gray-500">Studentlar soni</p>
-                                <p class="text-lg font-semibold text-gray-800">1285</p>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="text-xs text-gray-500">Aktiv studentlar</p>
+                                <p class="text-base md:text-lg font-semibold text-gray-800">1200</p>
                             </div>
-                            <div class="text-purple-600 text-xl"><i class="fas fa-users"></i></div>
+                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-user-check"></i></div>
+                        </div>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="text-xs text-gray-500">Studentlar soni</p>
+                                <p class="text-base md:text-lg font-semibold text-gray-800">1285</p>
+                            </div>
+                            <div class="text-purple-600 text-lg md:text-xl ml-2"><i class="fas fa-users"></i></div>
                         </div>
                     </div>
 
                     <!-- Charts Row -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-                            <h3 class="text-base font-semibold text-gray-800 mb-3">Umumiy pull diagrammasi (Oylar bo‘yicha)</h3>
-                            <canvas id="investLine" height="220"></canvas>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                            <h3 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3">Umumiy pull diagrammasi (Oylar bo'yicha)</h3>
+                            <div class="chart-container">
+                                <canvas id="investLine"></canvas>
+                            </div>
                         </div>
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-                            <h3 class="text-base font-semibold text-gray-800 mb-3">Toshkent Shaxar va viloyatlar bo‘yicha taqsimoti (Loyihalar bo‘yicha)</h3>
-                            <div class="w-full flex justify-center">
-                                <canvas id="avtobilimPie" height="200"></canvas>
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                            <h3 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3">Toshkent Shaxar va viloyatlar bo'yicha taqsimoti (Loyihalar bo'yicha)</h3>
+                            <div class="chart-container-pie flex justify-center items-center">
+                                <canvas id="avtobilimPie"></canvas>
                             </div>
                         </div>
                     </div>
 
                     <!-- Bar chart section -->
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-                        <h3 class="text-base font-semibold text-gray-800 mb-3 flex items-center space-x-2">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4">
+                        <h3 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 flex items-center space-x-2">
                             <span class="text-amber-500"><i class="fas fa-trophy"></i></span>
                             <span>TOP-5 o'quv markazlari (Studentlar soni bo'yicha)</span>
                         </h3>
-                        <div class="w-full" style="height:280px;">
+                        <div class="chart-container-bar">
                             <canvas id="topBar"></canvas>
                         </div>
                     </div>
                 </div>
 
                 <!-- Student table -->
-                <div id="studentSection" class="section-block bg-white rounded-xl shadow-sm border border-gray-200 p-4 hidden">
-                    <div class="flex items-center justify-between mb-4">
+                <div id="studentSection" class="section-block bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 hidden">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 md:mb-4 gap-3">
                         <div>
                             <p class="text-xs text-gray-500">Bosh sahifa / Studentlar</p>
-                            <h3 class="text-lg font-semibold text-gray-800">Studentlar ro'yxati</h3>
+                            <h3 class="text-base md:text-lg font-semibold text-gray-800">Studentlar ro'yxati</h3>
                         </div>
-                        <button id="openCreateStudentBtn" class="px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700"><i class="fas fa-plus mr-2"></i>Yangi student</button>
+                        <button id="openCreateStudentBtn" class="w-full sm:w-auto px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi student</button>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <div class="overflow-x-auto -mx-3 md:mx-0">
+                        <table class="min-w-full divide-y divide-gray-200 text-xs md:text-sm">
                             <thead class="bg-gray-50 text-gray-700">
                                 <tr>
-                                    <th class="px-4 py-2 text-left">ID</th>
-                                    <th class="px-4 py-2 text-left">Ism</th>
-                                    <th class="px-4 py-2 text-left">Telefon</th>
-                                    <th class="px-4 py-2 text-left">Parol</th>
-                                    <th class="px-4 py-2 text-left">Admin nomi</th>
-                                    <th class="px-4 py-2 text-left">Status</th>
-                                    <th class="px-4 py-2 text-left">Ro'yxatdan o'tgan sana</th>
-                                    <th class="px-4 py-2 text-left">O'zgarishlar foizi</th>
-                                    <th class="px-4 py-2 text-left">Amallar</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">ID</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">Ism</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">Telefon</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap hidden md:table-cell">Parol</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">Admin nomi</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">Status</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap hidden lg:table-cell">Ro'yxatdan o'tgan sana</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap hidden sm:table-cell">O'zgarishlar foizi</th>
+                                    <th class="px-2 md:px-4 py-2 text-left whitespace-nowrap">Amallar</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 <tr class="student-row" data-id="s1" data-changes-count="0">
-                                    <td class="px-4 py-2 text-gray-700">1</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900">Aziza Karimova</td>
-                                    <td class="px-4 py-2 text-gray-700">+998900001001</td>
-                                    <td class="px-4 py-2 text-gray-700">password123</td>
-                                    <td class="px-4 py-2 text-gray-700">Ali Valiyev</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
-                                    <td class="px-4 py-2 text-gray-700">2024-02-01</td>
-                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                                    <td class="px-4 py-2 space-x-2">
-                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">1</td>
+                                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">Aziza Karimova</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">+998900001001</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password123</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">Ali Valiyev</td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-02-01</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
                                 <tr class="student-row" data-id="s2" data-changes-count="0">
-                                    <td class="px-4 py-2 text-gray-700">2</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900">Bekzod Xolmatov</td>
-                                    <td class="px-4 py-2 text-gray-700">+998900001002</td>
-                                    <td class="px-4 py-2 text-gray-700">password456</td>
-                                    <td class="px-4 py-2 text-gray-700">Sardor Karimov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
-                                    <td class="px-4 py-2 text-gray-700">2024-03-12</td>
-                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                                    <td class="px-4 py-2 space-x-2">
-                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">2</td>
+                                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">Bekzod Xolmatov</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">+998900001002</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password456</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">Sardor Karimov</td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-03-12</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
                                 <tr class="student-row" data-id="s3" data-changes-count="0">
-                                    <td class="px-4 py-2 text-gray-700">3</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900">Diyor Abdulhayev</td>
-                                    <td class="px-4 py-2 text-gray-700">+998900001003</td>
-                                    <td class="px-4 py-2 text-gray-700">password789</td>
-                                    <td class="px-4 py-2 text-gray-700">Dilshod Rahimov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
-                                    <td class="px-4 py-2 text-gray-700">2024-01-25</td>
-                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                                    <td class="px-4 py-2 space-x-2">
-                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">3</td>
+                                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">Diyor Abdulhayev</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">+998900001003</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password789</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">Dilshod Rahimov</td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-01-25</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
                                 <tr class="student-row" data-id="s4" data-changes-count="0">
-                                    <td class="px-4 py-2 text-gray-700">4</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900">Madina Rasulova</td>
-                                    <td class="px-4 py-2 text-gray-700">+998900001004</td>
-                                    <td class="px-4 py-2 text-gray-700">password321</td>
-                                    <td class="px-4 py-2 text-gray-700">Olimjon Toshmatov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs">Bloklangan</span></td>
-                                    <td class="px-4 py-2 text-gray-700">2024-03-05</td>
-                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                                    <td class="px-4 py-2 space-x-2">
-                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">4</td>
+                                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">Madina Rasulova</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">+998900001004</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password321</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">Olimjon Toshmatov</td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs">Bloklangan</span></td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-03-05</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
                                 <tr class="student-row" data-id="s5" data-changes-count="0">
-                                    <td class="px-4 py-2 text-gray-700">5</td>
-                                    <td class="px-4 py-2 font-medium text-gray-900">Sabrina Ergasheva</td>
-                                    <td class="px-4 py-2 text-gray-700">+998900001005</td>
-                                    <td class="px-4 py-2 text-gray-700">password654</td>
-                                    <td class="px-4 py-2 text-gray-700">Javohir Ismoilov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
-                                    <td class="px-4 py-2 text-gray-700">2024-04-10</td>
-                                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                                    <td class="px-4 py-2 space-x-2">
-                                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">5</td>
+                                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">Sabrina Ergasheva</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">+998900001005</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password654</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700">Javohir Ismoilov</td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-04-10</td>
+                                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -215,8 +306,8 @@
     </div>
 
     <!-- Create Student Modal -->
-    <div id="createStudentOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+    <div id="createStudentOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-4 md:p-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <p class="text-xs text-gray-500">Yangi student yaratish</p>
@@ -263,8 +354,8 @@
     </div>
 
     <!-- Profile Settings Modal -->
-    <div id="profileSettingsOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+    <div id="profileSettingsOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-4 md:p-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <p class="text-xs text-gray-500">Profil sozlamalari</p>
@@ -298,8 +389,8 @@
     </div>
 
     <!-- Edit User Modal -->
-    <div id="editUserOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
+    <div id="editUserOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg p-4 md:p-6 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <p class="text-xs text-gray-500" id="editModalSubtitle">Admin ma'lumotlarini tahrirlash</p>
@@ -310,40 +401,60 @@
             <form id="editUserForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Ism</label>
-                    <input type="text" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-                    <input type="tel" id="editPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="tel" id="editPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Parol</label>
-                    <input type="text" id="editPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <input type="text" id="editPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                 </div>
                
+                <!-- Admin fields (hidden for admin panel) -->
+                <div id="editAdminFields" style="display: none;">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">O'quv markaz nomi</label>
+                        <input type="text" id="editCenterName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Viloyat</label>
+                        <input type="text" id="editRegion" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tuman</label>
+                        <input type="text" id="editDistrict" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tugash vaqti</label>
+                        <input type="date" id="editExpiryDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                </div>
+                
                 <!-- Student fields -->
                 <div id="editStudentFields" style="display: none;">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Admin nomi</label>
-                        <select id="editAdminName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select id="editAdminName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                             <option value="">Admin tanlang</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Ro'yxatdan o'tgan sana</label>
-                        <input type="date" id="editCreatedDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="date" id="editCreatedDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select id="editStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="editStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                         <option>Aktiv</option>
                         <option>Bloklangan</option>
                     </select>
                 </div>
                 <div class="flex items-center justify-end space-x-3 pt-2">
                     <button type="button" id="cancelEditUser" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Bekor qilish</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Saqlash</button>
+                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Saqlash</button>
                 </div>
             </form>
         </div>
@@ -351,8 +462,65 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu Functions
+            const sidebar = document.getElementById("sidebar");
+            const sidebarOverlay = document.getElementById("sidebarOverlay");
+            const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+            const mobileCloseBtn = document.getElementById("mobileCloseBtn");
+            
+            function openMobileMenu() {
+                sidebar.classList.add("mobile-open");
+                sidebarOverlay.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+            
+            function closeMobileMenu() {
+                sidebar.classList.remove("mobile-open");
+                sidebarOverlay.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener("click", openMobileMenu);
+            }
+            
+            if (mobileCloseBtn) {
+                mobileCloseBtn.addEventListener("click", closeMobileMenu);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener("click", closeMobileMenu);
+            }
+            
+            // Close mobile menu when clicking on nav links
+            const sidebarNavLinks = document.querySelectorAll("#sidebarNav a");
+            sidebarNavLinks.forEach(link => {
+                link.addEventListener("click", () => {
+                    if (window.innerWidth < 768) {
+                        closeMobileMenu();
+                    }
+                });
+            });
+            
+            // Close mobile menu on window resize if screen becomes large
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 768) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Responsive font size function
+            function getResponsiveFontSize() {
+                return window.innerWidth < 640 ? 9 : window.innerWidth < 1024 ? 10 : 11;
+            }
+            
             const ctx = document.getElementById("investLine");
             if (ctx) {
+                // Create gradient for line chart
+                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, 'rgba(34, 197, 94, 0.3)');
+                gradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
+
                 new Chart(ctx, {
                     type: "line",
                     data: {
@@ -361,20 +529,80 @@
                             label: "Investitsiya",
                             data: [45, 55, 52, 70, 90, 110, 125, 95, 135, 140, 155, 170],
                             borderColor: "#22c55e",
-                            backgroundColor: "rgba(34,197,94,0.12)",
-                            tension: 0.35,
+                            backgroundColor: gradient,
+                            tension: 0.4,
                             fill: true,
-                            borderWidth: 2,
-                            pointRadius: 3,
-                            pointBackgroundColor: "#22c55e"
+                            borderWidth: 3,
+                            pointRadius: 0,
+                            pointHoverRadius: 6,
+                            pointBackgroundColor: "#22c55e",
+                            pointBorderColor: "#ffffff",
+                            pointBorderWidth: 2,
+                            pointHoverBackgroundColor: "#16a34a",
+                            pointHoverBorderColor: "#ffffff",
+                            pointHoverBorderWidth: 3,
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 4,
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(34, 197, 94, 0.3)'
                         }]
                     },
                     options: {
                         responsive: true,
-                        plugins: { legend: { display: false } },
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutQuart'
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: window.innerWidth < 640 ? 8 : 12,
+                                titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
+                                bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
+                                borderColor: '#22c55e',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + 'M';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
-                            y: { grid: { display: true, color: "#e5e7eb" }, ticks: { color: "#4b5563" } },
-                            x: { grid: { display: false }, ticks: { color: "#4b5563" } }
+                            y: { 
+                                grid: { 
+                                    display: true, 
+                                    color: "#e5e7eb",
+                                    drawBorder: false
+                                }, 
+                                ticks: { 
+                                    color: "#4b5563",
+                                    font: { size: window.innerWidth < 640 ? 9 : 11 },
+                                    callback: function(value) {
+                                        return value + 'M';
+                                    }
+                                },
+                                min: 0,
+                                max: 180,
+                                stepSize: 45
+                            },
+                            x: { 
+                                grid: { display: false }, 
+                                ticks: { 
+                                    color: "#4b5563",
+                                    font: { size: window.innerWidth < 640 ? 9 : 11 },
+                                    maxRotation: window.innerWidth < 640 ? 45 : 0,
+                                    minRotation: 0
+                                }
+                            }
                         }
                     }
                 });
@@ -385,13 +613,59 @@
                 new Chart(pie, {
                     type: "doughnut",
                     data: {
-                        labels: ["ShehrozAvtobilim", "Avtobilim", "avtotehnika", "Avtobotuz", "Boshqalar"],
+                        labels: ["TechStart AI", "Green Energy", "E-Commerce", "FinTech", "Boshqalar"],
                         datasets: [{
-                            data: [22, 26, 16, 20, 16],
-                            backgroundColor: ["#10b981", "#06b6d4", "#22c55e", "#0ea5e9", "#fbbf24"]
+                            data: [26, 22, 20, 16, 16],
+                            backgroundColor: [
+                                "rgba(6, 182, 212, 0.9)",
+                                "rgba(16, 185, 129, 0.9)",
+                                "rgba(34, 197, 94, 0.9)",
+                                "rgba(14, 165, 233, 0.9)",
+                                "rgba(5, 150, 105, 0.9)"
+                            ],
+                            borderColor: [
+                                "#06b6d4",
+                                "#10b981",
+                                "#22c55e",
+                                "#0ea5e9",
+                                "#059669"
+                            ],
+                            borderWidth: 2,
+                            hoverOffset: 8,
+                            hoverBorderWidth: 3
                         }]
                     },
-                    options: { responsive: true, plugins: { legend: { position: "bottom" } }, cutout: "60%" }
+                    options: { 
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true,
+                            duration: 2000,
+                            easing: 'easeInOutQuart'
+                        },
+                        plugins: { 
+                            legend: { 
+                                position: "bottom",
+                                labels: {
+                                    padding: window.innerWidth < 640 ? 5 : 8,
+                                    font: { size: window.innerWidth < 640 ? 9 : 10 },
+                                    usePointStyle: true,
+                                    boxWidth: window.innerWidth < 640 ? 10 : 12
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: window.innerWidth < 640 ? 8 : 12,
+                                titleFont: { size: window.innerWidth < 640 ? 11 : 12 },
+                                bodyFont: { size: window.innerWidth < 640 ? 10 : 11 }
+                            }
+                        }, 
+                        cutout: window.innerWidth < 640 ? "55%" : "60%",
+                        interaction: {
+                            intersect: false
+                        }
+                    }
                 });
             }
 
@@ -422,36 +696,94 @@
 
             const bar = document.getElementById("topBar");
             if (bar) {
+                // Create gradient for bar chart
+                const barGradient = bar.getContext('2d').createLinearGradient(0, 0, 0, 400);
+                barGradient.addColorStop(0, 'rgba(6, 182, 212, 0.9)');
+                barGradient.addColorStop(1, 'rgba(6, 182, 212, 0.5)');
+
                 new Chart(bar, {
                     type: "bar",
                     data: {
-                        labels: ["ShehrozAvtobilim", "Avtobilim", "avtotehnika", "Avtobotuz", "Boshqalar"],
+                        labels: ["TechStart AI", "Green Energy", "E-Commerce", "FinTech", "HealthTech"],
                         datasets: [{
                             label: "Investitsiya",
-                            data: [320, 280, 250, 200, 180],
-                            backgroundColor: "#07a3e8",
-                            borderRadius: 6,
-                            barThickness: 45,
-                            maxBarThickness: 60
+                            data: [310, 280, 250, 200, 180],
+                            backgroundColor: barGradient,
+                            borderColor: "#06b6d4",
+                            borderWidth: 2,
+                            borderRadius: 8,
+                            borderSkipped: false,
+                            barThickness: 50,
+                            maxBarThickness: 65
                         }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: true,
-                        plugins: { legend: { display: false } },
+                        maintainAspectRatio: false,
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeInOutQuart',
+                            delay: (context) => {
+                                let delay = 0;
+                                if (context.type === 'data' && context.mode === 'default') {
+                                    delay = context.dataIndex * 100;
+                                }
+                                return delay;
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        plugins: { 
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: window.innerWidth < 640 ? 8 : 12,
+                                titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
+                                bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
+                                borderColor: '#22c55e',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                displayColors: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.parsed.y + 'M';
+                                    }
+                                }
+                            }
+                        },
                         scales: {
                             y: {
-                                grid: { color: "#e5e7eb" },
-                                ticks: { color: "#4b5563" },
-                                suggestedMin: 0,
-                                suggestedMax: 340
+                                grid: { 
+                                    color: "#e5e7eb",
+                                    drawBorder: false
+                                },
+                                ticks: { 
+                                    color: "#4b5563",
+                                    font: { size: window.innerWidth < 640 ? 9 : 11 },
+                                    callback: function(value) {
+                                        return value + 'M';
+                                    }
+                                },
+                                min: 0,
+                                max: 320,
+                                stepSize: 80
                             },
                             x: {
                                 grid: { display: false },
-                                ticks: { color: "#4b5563" }
+                                ticks: { 
+                                    color: "#4b5563",
+                                    font: { size: window.innerWidth < 640 ? 9 : 11 },
+                                    maxRotation: window.innerWidth < 640 ? 45 : 0,
+                                    minRotation: 0
+                                }
                             }
                         },
-                        layout: { padding: { left: 10, right: 30, top: 10, bottom: 10 } }
+                        layout: { padding: { left: 10, right: 20, top: 10, bottom: 10 } },
+                        onHover: (event, activeElements) => {
+                            bar.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                        }
                     }
                 });
             }
@@ -906,17 +1238,17 @@
                 const statusClass = status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600";
                 
                 newRow.innerHTML = `
-                    <td class="px-4 py-2 text-gray-700">${newId}</td>
-                    <td class="px-4 py-2 font-medium text-gray-900">${name}</td>
-                    <td class="px-4 py-2 text-gray-700">${phone}</td>
-                    <td class="px-4 py-2 text-gray-700">${password}</td>
-                    <td class="px-4 py-2 text-gray-700">${adminName}</td>
-                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full ${statusClass} text-xs">${status}</span></td>
-                    <td class="px-4 py-2 text-gray-700">${createdDate || ""}</td>
-                    <td class="px-4 py-2 text-gray-700"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
-                    <td class="px-4 py-2 space-x-2">
-                        <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
-                        <button class="deleteStudentBtn px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
+                    <td class="px-2 md:px-4 py-2 text-gray-700">${newId}</td>
+                    <td class="px-2 md:px-4 py-2 font-medium text-gray-900">${name}</td>
+                    <td class="px-2 md:px-4 py-2 text-gray-700">${phone}</td>
+                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">${password}</td>
+                    <td class="px-2 md:px-4 py-2 text-gray-700">${adminName}</td>
+                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full ${statusClass} text-xs">${status}</span></td>
+                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">${createdDate || ""}</td>
+                    <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
+                    <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
+                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                        <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                     </td>
                 `;
                 
