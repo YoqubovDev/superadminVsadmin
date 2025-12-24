@@ -492,6 +492,48 @@
                 sidebarOverlay.addEventListener("click", closeMobileMenu);
             }
             
+            // Phone number validation - only allow numbers and + at the start
+            function validatePhoneInput(input) {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value;
+                    // Allow + only at the start
+                    if (value.startsWith('+')) {
+                        // Remove everything except + and numbers
+                        value = '+' + value.slice(1).replace(/[^0-9]/g, '');
+                    } else {
+                        // Remove everything except numbers
+                        value = value.replace(/[^0-9]/g, '');
+                    }
+                    e.target.value = value;
+                });
+                
+                // Prevent non-numeric characters on paste
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    let paste = (e.clipboardData || window.clipboardData).getData('text');
+                    // Allow + only at the start
+                    if (paste.startsWith('+')) {
+                        paste = '+' + paste.slice(1).replace(/[^0-9]/g, '');
+                    } else {
+                        paste = paste.replace(/[^0-9]/g, '');
+                    }
+                    this.value = paste;
+                });
+            }
+            
+            // Apply phone validation to all phone input fields
+            const phoneInputs = [
+                document.getElementById("createStudentPhone"),
+                document.getElementById("editPhone"),
+                document.getElementById("profilePhoneInput")
+            ];
+            
+            phoneInputs.forEach(input => {
+                if (input) {
+                    validatePhoneInput(input);
+                }
+            });
+            
             // Close mobile menu when clicking on nav links
             const sidebarNavLinks = document.querySelectorAll("#sidebarNav a");
             sidebarNavLinks.forEach(link => {
