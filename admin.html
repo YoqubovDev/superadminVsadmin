@@ -100,7 +100,7 @@
         <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col">
             <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
                 <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors flex-1" id="openProfileSettings">
-                    <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">Sh</div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">Sh</div>
                     <div>
                         <p class="text-sm text-gray-500">Admin Panel</p>
                         <p class="text-base font-semibold text-gray-800" id="profileName">Yoqubov Shehroz</p>
@@ -112,7 +112,7 @@
                 </button>
             </div>
             <nav class="flex-1 px-3 py-4 space-y-1" id="sidebarNav">
-                <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-green-600 text-white font-semibold">
+                <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-600 text-white font-semibold">
                     <i class="fas fa-home"></i><span>Bosh sahifa</span>
                 </a>
                 <a href="#" data-target="studentSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
@@ -128,10 +128,10 @@
 
         <!-- Main -->
         <main class="flex-1 lg:ml-0">
-            <header id="topSection" class="h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 pt-16 lg:pt-0">
-                <div>
-                    <p class="text-xs text-gray-500">Bosh sahifa / Admin Dashboard</p>
-                    <h1 class="text-lg md:text-xl font-semibold text-gray-800">Admin Dashboard</h1>
+            <header id="topSection" class="min-h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 pt-16 lg:pt-0 pb-3 lg:pb-0">
+                <div class="w-full">
+                    <p class="text-xs text-gray-500 truncate">Bosh sahifa / Admin Dashboard</p>
+                    <h1 class="text-base md:text-lg lg:text-xl font-semibold text-gray-800 truncate">Admin Dashboard</h1>
                 </div>
             </header>
 
@@ -145,14 +145,14 @@
                                 <p class="text-xs text-gray-500">Umumiy pul miqdori</p>
                                 <p class="text-base md:text-lg font-semibold text-gray-800">1,000,000,000 so'm</p>
                             </div>
-                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-coins"></i></div>
+                            <div class="text-blue-600 text-lg md:text-xl ml-2"><i class="fas fa-coins"></i></div>
                         </div>
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
                             <div class="flex-1">
                                 <p class="text-xs text-gray-500">Aktiv studentlar</p>
                                 <p class="text-base md:text-lg font-semibold text-gray-800">1200</p>
                             </div>
-                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-user-check"></i></div>
+                            <div class="text-blue-600 text-lg md:text-xl ml-2"><i class="fas fa-user-check"></i></div>
                         </div>
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
                             <div class="flex-1">
@@ -198,7 +198,7 @@
                             <p class="text-xs text-gray-500">Bosh sahifa / Studentlar</p>
                             <h3 class="text-base md:text-lg font-semibold text-gray-800">Studentlar ro'yxati</h3>
                         </div>
-                        <button id="openCreateStudentBtn" class="w-full sm:w-auto px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi student</button>
+                        <button id="openCreateStudentBtn" class="w-full sm:w-auto px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi student</button>
                     </div>
                     <div class="overflow-x-auto -mx-3 md:mx-0">
                         <table class="min-w-full divide-y divide-gray-200 text-xs md:text-sm">
@@ -222,11 +222,11 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">+998900001001</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password123</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700">Ali Valiyev</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-02-01</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -236,11 +236,11 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">+998900001002</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password456</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700">Sardor Karimov</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-03-12</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -250,11 +250,11 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">+998900001003</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password789</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700">Dilshod Rahimov</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-01-25</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -268,7 +268,7 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-03-05</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -278,11 +278,11 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">+998900001005</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password654</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700">Javohir Ismoilov</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-04-10</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -401,34 +401,34 @@
             <form id="editUserForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Ism</label>
-                    <input type="text" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <input type="text" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Telefon</label>
-                    <input type="tel" id="editPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <input type="tel" id="editPhone" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Parol</label>
-                    <input type="text" id="editPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <input type="text" id="editPassword" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                
                 <!-- Admin fields (hidden for admin panel) -->
                 <div id="editAdminFields" style="display: none;">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">O'quv markaz nomi</label>
-                        <input type="text" id="editCenterName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <input type="text" id="editCenterName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Viloyat</label>
-                        <input type="text" id="editRegion" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <input type="text" id="editRegion" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Tuman</label>
-                        <input type="text" id="editDistrict" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <input type="text" id="editDistrict" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Tugash vaqti</label>
-                        <input type="date" id="editExpiryDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <input type="date" id="editExpiryDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 
@@ -436,25 +436,25 @@
                 <div id="editStudentFields" style="display: none;">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Admin nomi</label>
-                        <select id="editAdminName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <select id="editAdminName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Admin tanlang</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Ro'yxatdan o'tgan sana</label>
-                        <input type="date" id="editCreatedDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <input type="date" id="editCreatedDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                    <select id="editStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <select id="editStatus" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option>Aktiv</option>
                         <option>Bloklangan</option>
                     </select>
                 </div>
                 <div class="flex items-center justify-end space-x-3 pt-2">
                     <button type="button" id="cancelEditUser" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Bekor qilish</button>
-                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Saqlash</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Saqlash</button>
                 </div>
             </form>
         </div>
@@ -560,8 +560,8 @@
             if (ctx) {
                 // Create gradient for line chart
                 const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(34, 197, 94, 0.3)');
-                gradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
+                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
+                gradient.addColorStop(1, 'rgba(59, 130, 246, 0.05)');
 
                 new Chart(ctx, {
                     type: "line",
@@ -570,23 +570,23 @@
                         datasets: [{
                             label: "Investitsiya",
                             data: [45, 55, 52, 70, 90, 110, 125, 95, 135, 140, 155, 170],
-                            borderColor: "#22c55e",
+                            borderColor: "#3b82f6",
                             backgroundColor: gradient,
                             tension: 0.4,
                             fill: true,
                             borderWidth: 3,
                             pointRadius: 0,
                             pointHoverRadius: 6,
-                            pointBackgroundColor: "#22c55e",
+                            pointBackgroundColor: "#3b82f6",
                             pointBorderColor: "#ffffff",
                             pointBorderWidth: 2,
-                            pointHoverBackgroundColor: "#16a34a",
+                            pointHoverBackgroundColor: "#2563eb",
                             pointHoverBorderColor: "#ffffff",
                             pointHoverBorderWidth: 3,
                             shadowOffsetX: 0,
                             shadowOffsetY: 4,
                             shadowBlur: 10,
-                            shadowColor: 'rgba(34, 197, 94, 0.3)'
+                            shadowColor: 'rgba(59, 130, 246, 0.3)'
                         }]
                     },
                     options: {
@@ -607,7 +607,7 @@
                                 padding: window.innerWidth < 640 ? 8 : 12,
                                 titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
                                 bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
-                                borderColor: '#22c55e',
+                                borderColor: '#3b82f6',
                                 borderWidth: 1,
                                 cornerRadius: 8,
                                 displayColors: false,
@@ -661,14 +661,14 @@
                             backgroundColor: [
                                 "rgba(6, 182, 212, 0.9)",
                                 "rgba(16, 185, 129, 0.9)",
-                                "rgba(34, 197, 94, 0.9)",
+                                "rgba(59, 130, 246, 0.9)",
                                 "rgba(14, 165, 233, 0.9)",
                                 "rgba(5, 150, 105, 0.9)"
                             ],
                             borderColor: [
                                 "#06b6d4",
                                 "#10b981",
-                                "#22c55e",
+                                "#3b82f6",
                                 "#0ea5e9",
                                 "#059669"
                             ],
@@ -723,8 +723,8 @@
                         if (section) {
                             section.scrollIntoView({ behavior: "smooth", block: "start" });
                         }
-                        sidebarNav.querySelectorAll("a").forEach((a) => a.classList.remove("bg-green-600", "text-white", "font-semibold"));
-                        link.classList.add("bg-green-600", "text-white", "font-semibold");
+                        sidebarNav.querySelectorAll("a").forEach((a) => a.classList.remove("bg-blue-600", "text-white", "font-semibold"));
+                        link.classList.add("bg-blue-600", "text-white", "font-semibold");
                         
                         // Show single section when sidebar item clicked; otherwise show all
                         if (targetId === "adminSection" || targetId === "studentSection" || targetId === "dashboardSection") {
@@ -784,7 +784,7 @@
                                 padding: window.innerWidth < 640 ? 8 : 12,
                                 titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
                                 bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
-                                borderColor: '#22c55e',
+                                borderColor: '#3b82f6',
                                 borderWidth: 1,
                                 cornerRadius: 8,
                                 displayColors: false,
@@ -913,7 +913,7 @@
                         const statusBadge = studentCells[5].querySelector("span"); // Status is in cell index 5
                         if (statusBadge) {
                             statusBadge.textContent = "Aktiv";
-                            statusBadge.className = "px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs";
+                            statusBadge.className = "px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs";
                         }
                     }
                 });
@@ -1003,7 +1003,7 @@
                 } else if (percentage >= 70 && percentage < 88) {
                     return "bg-yellow-50 text-yellow-600"; // Sariq
                 } else if (percentage >= 88) {
-                    return "bg-green-50 text-green-700"; // Yashil
+                    return "bg-blue-50 text-blue-700"; // Yashil
                 } else {
                     // 60-70 orasida - qizil
                     return "bg-red-50 text-red-600";
@@ -1035,6 +1035,37 @@
                 activeRow = null;
                 currentTableType = null;
             }
+
+            // Function to show all students (remove filter)
+            function showAllStudents() {
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                let visibleCount = 0;
+                
+                studentRows.forEach((row) => {
+                    row.style.display = "";
+                    visibleCount++;
+                });
+                
+                // Update total count
+                const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                if (totalText) {
+                    totalText.textContent = `Jami ${visibleCount} ta student`;
+                }
+            }
+
+            // Attach click event listeners to admin names in student table
+            document.querySelectorAll("#studentSection .student-row").forEach((row) => {
+                const cells = row.querySelectorAll("td");
+                const adminNameCell = cells[4]; // Admin nomi column
+                
+                // Make admin name clickable
+                adminNameCell.style.cursor = "pointer";
+                adminNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                adminNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    showAllStudents();
+                });
+            });
 
             // Attach event listeners to edit buttons in admin table
             document.querySelectorAll("#adminSection .editUserBtn").forEach((btn) => {
@@ -1130,7 +1161,7 @@
                     const statusBadge = cells[7].querySelector("span");
                     if (statusBadge) {
                         statusBadge.textContent = finalStatus;
-                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${finalStatus === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${finalStatus === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600"}`;
                     }
                     
                     // If admin status changed to blocked, block all their students
@@ -1179,7 +1210,7 @@
                     const statusBadge = cells[5].querySelector("span");
                     if (statusBadge) {
                         statusBadge.textContent = newStatus;
-                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${newStatus === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${newStatus === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600"}`;
                     }
                     
                     // Update created date
@@ -1277,7 +1308,7 @@
                 newRow.setAttribute("data-id", `s${newId}`);
                 newRow.setAttribute("data-changes-count", "0");
                 
-                const statusClass = status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600";
+                const statusClass = status === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600";
                 
                 newRow.innerHTML = `
                     <td class="px-2 md:px-4 py-2 text-gray-700">${newId}</td>
@@ -1289,7 +1320,7 @@
                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">${createdDate || ""}</td>
                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden sm:table-cell"><span class="px-2 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold">0%</span></td>
                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                     </td>
                 `;
@@ -1308,6 +1339,18 @@
                             totalText.textContent = `Jami ${remainingRows} ta student`;
                         }
                     }
+                });
+                
+                // Attach click event listener to admin name
+                const cells = newRow.querySelectorAll("td");
+                const adminNameCell = cells[4]; // Admin nomi column
+                
+                // Make admin name clickable
+                adminNameCell.style.cursor = "pointer";
+                adminNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                adminNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    showAllStudents();
                 });
                 
                 // Update total count

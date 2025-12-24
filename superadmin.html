@@ -100,7 +100,7 @@
         <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 flex flex-col">
             <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
                 <div class="flex items-center space-x-3 cursor-pointer hover:bg-gray-50 rounded-lg p-2 -m-2 transition-colors flex-1" id="openProfileSettings">
-                    <div class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">Sh</div>
+                    <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold">Sh</div>
                     <div>
                         <p class="text-sm text-gray-500">Super Admin Panel</p>
                         <p class="text-base font-semibold text-gray-800" id="profileName">Yoqubov Shehroz</p>
@@ -112,7 +112,7 @@
                 </button>
             </div>
             <nav class="flex-1 px-3 py-4 space-y-1" id="sidebarNav">
-                <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-green-600 text-white font-semibold">
+                <a href="#" data-target="dashboardSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-600 text-white font-semibold">
                     <i class="fas fa-home"></i><span>Bosh sahifa</span>
                 </a>
                 <a href="#" data-target="adminSection" class="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100">
@@ -131,10 +131,10 @@
 
         <!-- Main -->
         <main class="flex-1 lg:ml-0">
-            <header id="topSection" class="h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 pt-16 lg:pt-0">
-                <div>
-                    <p class="text-xs text-gray-500">Bosh sahifa / Admin Dashboard</p>
-                    <h1 class="text-lg md:text-xl font-semibold text-gray-800">Admin Dashboard</h1>
+            <header id="topSection" class="min-h-16 bg-white border-b border-gray-200 flex items-center px-4 md:px-6 pt-16 lg:pt-0 pb-3 lg:pb-0">
+                <div class="w-full">
+                    <p class="text-xs text-gray-500 truncate">Bosh sahifa / Admin Dashboard</p>
+                    <h1 class="text-base md:text-lg lg:text-xl font-semibold text-gray-800 truncate">Admin Dashboard</h1>
                 </div>
             </header>
 
@@ -148,14 +148,14 @@
                                 <p class="text-xs text-gray-500">Umumiy pul miqdori</p>
                                 <p class="text-base md:text-lg font-semibold text-gray-800">1,000,000,000 so'm</p>
                             </div>
-                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-coins"></i></div>
+                            <div class="text-blue-600 text-lg md:text-xl ml-2"><i class="fas fa-coins"></i></div>
                         </div>
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
                             <div class="flex-1">
                                 <p class="text-xs text-gray-500">Adminlar soni</p>
                                 <p class="text-base md:text-lg font-semibold text-gray-800">45</p>
                             </div>
-                            <div class="text-green-600 text-lg md:text-xl ml-2"><i class="fas fa-users"></i></div>
+                            <div class="text-blue-600 text-lg md:text-xl ml-2"><i class="fas fa-users"></i></div>
                         </div>
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-3 md:p-4 flex items-center justify-between">
                             <div class="flex-1">
@@ -208,7 +208,7 @@
                             <p class="text-xs text-gray-500">Bosh sahifa / Adminlar</p>
                             <h3 class="text-base md:text-lg font-semibold text-gray-800">Adminlar ro'yxati</h3>
                         </div>
-                        <button id="openCreateAdminBtn" class="w-full sm:w-auto px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi admin</button>
+                        <button id="openCreateAdminBtn" class="w-full sm:w-auto px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi admin</button>
                     </div>
                     <div class="overflow-x-auto -mx-3 md:mx-0">
                         <table class="min-w-full divide-y divide-gray-200 text-xs md:text-sm">
@@ -237,12 +237,12 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">ShehrozAvtobilim</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">Toshkent</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">Yunusobod</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden xl:table-cell">2024-01-15</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden xl:table-cell">2024-04-10</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2025-12-31</td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editUserBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editUserBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteUserBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -254,7 +254,7 @@
                                     <td class="px-4 py-2 text-gray-700">Avtobilim</td>
                                     <td class="px-4 py-2 text-gray-700">Samarqand</td>
                                     <td class="px-4 py-2 text-gray-700">Kattakurgan</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-02-20</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-05</td>
                                     <td class="px-4 py-2 text-gray-700">2025-10-20</td>
@@ -271,7 +271,7 @@
                                     <td class="px-4 py-2 text-gray-700">Avtotehnika</td>
                                     <td class="px-4 py-2 text-gray-700">Farg'ona</td>
                                     <td class="px-4 py-2 text-gray-700">Marg'ilon</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-03-10</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-18</td>
                                     <td class="px-4 py-2 text-gray-700">2025-09-15</td>
@@ -305,7 +305,7 @@
                                     <td class="px-4 py-2 text-gray-700">Avtobilim PRO</td>
                                     <td class="px-4 py-2 text-gray-700">Samarqand</td>
                                     <td class="px-4 py-2 text-gray-700">Urgut</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-01-20</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-21</td>
                                     <td class="px-4 py-2 text-gray-700">2025-07-10</td>
@@ -322,7 +322,7 @@
                                     <td class="px-4 py-2 text-gray-700">Avtoteach</td>
                                     <td class="px-4 py-2 text-gray-700">Farg'ona</td>
                                     <td class="px-4 py-2 text-gray-700">Marg'ilon</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-02-15</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-18</td>
                                     <td class="px-4 py-2 text-gray-700">2025-06-30</td>
@@ -339,7 +339,7 @@
                                     <td class="px-4 py-2 text-gray-700">AvtoAcademy</td>
                                     <td class="px-4 py-2 text-gray-700">Toshkent</td>
                                     <td class="px-4 py-2 text-gray-700">Yakkasaroy</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-03-25</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-22</td>
                                     <td class="px-4 py-2 text-gray-700">2025-06-01</td>
@@ -356,7 +356,7 @@
                                     <td class="px-4 py-2 text-gray-700">AvtoDrive</td>
                                     <td class="px-4 py-2 text-gray-700">Samarqand</td>
                                     <td class="px-4 py-2 text-gray-700">Kattakurgan</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-12</td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-23</td>
                                     <td class="px-4 py-2 text-gray-700">2025-05-20</td>
@@ -386,7 +386,7 @@
                             <p class="text-xs text-gray-500">Bosh sahifa / Studentlar</p>
                             <h3 class="text-base md:text-lg font-semibold text-gray-800">Studentlar ro'yxati</h3>
                         </div>
-                        <button id="openCreateStudentBtn" class="w-full sm:w-auto px-3 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi student</button>
+                        <button id="openCreateStudentBtn" class="w-full sm:w-auto px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 whitespace-nowrap"><i class="fas fa-plus mr-2"></i>Yangi student</button>
                     </div>
                     <div class="overflow-x-auto -mx-3 md:mx-0">
                         <table class="min-w-full divide-y divide-gray-200 text-xs md:text-sm">
@@ -409,10 +409,10 @@
                                     <td class="px-2 md:px-4 py-2 text-gray-700">+998900001001</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden md:table-cell">password123</td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700">Ali Valiyev</td>
-                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">2024-02-01</td>
                                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                                     </td>
                                 </tr>
@@ -422,7 +422,7 @@
                                     <td class="px-4 py-2 text-gray-700">+998900001002</td>
                                     <td class="px-4 py-2 text-gray-700">password456</td>
                                     <td class="px-4 py-2 text-gray-700">Sardor Karimov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-03-12</td>
                                     <td class="px-4 py-2 space-x-2">
                                         <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
@@ -435,7 +435,7 @@
                                     <td class="px-4 py-2 text-gray-700">+998900001003</td>
                                     <td class="px-4 py-2 text-gray-700">password789</td>
                                     <td class="px-4 py-2 text-gray-700">Dilshod Rahimov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-01-25</td>
                                     <td class="px-4 py-2 space-x-2">
                                         <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
@@ -461,7 +461,7 @@
                                     <td class="px-4 py-2 text-gray-700">+998900001005</td>
                                     <td class="px-4 py-2 text-gray-700">password654</td>
                                     <td class="px-4 py-2 text-gray-700">Javohir Ismoilov</td>
-                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs">Aktiv</span></td>
+                                    <td class="px-4 py-2"><span class="px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs">Aktiv</span></td>
                                     <td class="px-4 py-2 text-gray-700">2024-04-10</td>
                                     <td class="px-4 py-2 space-x-2">
                                         <button class="editStudentBtn px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
@@ -795,8 +795,8 @@
             if (ctx) {
                 // Create gradient for line chart
                 const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 400);
-                gradient.addColorStop(0, 'rgba(34, 197, 94, 0.3)');
-                gradient.addColorStop(1, 'rgba(34, 197, 94, 0.05)');
+                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)');
+                gradient.addColorStop(1, 'rgba(59, 130, 246, 0.05)');
 
                 new Chart(ctx, {
                     type: "line",
@@ -805,23 +805,23 @@
                         datasets: [{
                             label: "Investitsiya",
                             data: [45, 55, 52, 70, 90, 110, 125, 95, 135, 140, 155, 170],
-                            borderColor: "#22c55e",
+                            borderColor: "#3b82f6",
                             backgroundColor: gradient,
                             tension: 0.4,
                             fill: true,
                             borderWidth: 3,
                             pointRadius: 0,
                             pointHoverRadius: 6,
-                            pointBackgroundColor: "#22c55e",
+                            pointBackgroundColor: "#3b82f6",
                             pointBorderColor: "#ffffff",
                             pointBorderWidth: 2,
-                            pointHoverBackgroundColor: "#16a34a",
+                            pointHoverBackgroundColor: "#2563eb",
                             pointHoverBorderColor: "#ffffff",
                             pointHoverBorderWidth: 3,
                             shadowOffsetX: 0,
                             shadowOffsetY: 4,
                             shadowBlur: 10,
-                            shadowColor: 'rgba(34, 197, 94, 0.3)'
+                            shadowColor: 'rgba(59, 130, 246, 0.3)'
                         }]
                     },
                     options: {
@@ -842,7 +842,7 @@
                                 padding: window.innerWidth < 640 ? 8 : 12,
                                 titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
                                 bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
-                                borderColor: '#22c55e',
+                                borderColor: '#3b82f6',
                                 borderWidth: 1,
                                 cornerRadius: 8,
                                 displayColors: false,
@@ -896,14 +896,14 @@
                             backgroundColor: [
                                 "rgba(6, 182, 212, 0.9)",
                                 "rgba(16, 185, 129, 0.9)",
-                                "rgba(34, 197, 94, 0.9)",
+                                "rgba(59, 130, 246, 0.9)",
                                 "rgba(14, 165, 233, 0.9)",
                                 "rgba(5, 150, 105, 0.9)"
                             ],
                             borderColor: [
                                 "#06b6d4",
                                 "#10b981",
-                                "#22c55e",
+                                "#3b82f6",
                                 "#0ea5e9",
                                 "#059669"
                             ],
@@ -958,12 +958,27 @@
                         if (section) {
                             section.scrollIntoView({ behavior: "smooth", block: "start" });
                         }
-                        sidebarNav.querySelectorAll("a").forEach((a) => a.classList.remove("bg-green-600", "text-white", "font-semibold"));
-                        link.classList.add("bg-green-600", "text-white", "font-semibold");
+                        sidebarNav.querySelectorAll("a").forEach((a) => a.classList.remove("bg-blue-600", "text-white", "font-semibold"));
+                        link.classList.add("bg-blue-600", "text-white", "font-semibold");
                         
                         // Show single section when sidebar item clicked; otherwise show all
                         if (targetId === "adminSection" || targetId === "studentSection" || targetId === "dashboardSection") {
                             contentSections.forEach((el) => el.classList.toggle("hidden", el.id !== targetId));
+                            
+                            // If student section is opened, show all students (remove filter)
+                            if (targetId === "studentSection") {
+                                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                                studentRows.forEach((row) => {
+                                    row.style.display = "";
+                                });
+                                
+                                // Update total count
+                                const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                                if (totalText) {
+                                    const totalCount = document.querySelectorAll("#studentSection .student-row").length;
+                                    totalText.textContent = `Jami ${totalCount} ta student`;
+                                }
+                            }
                         } else {
                             contentSections.forEach((el) => el.classList.remove("hidden"));
                         }
@@ -1019,7 +1034,7 @@
                                 padding: window.innerWidth < 640 ? 8 : 12,
                                 titleFont: { size: window.innerWidth < 640 ? 11 : 14, weight: 'bold' },
                                 bodyFont: { size: window.innerWidth < 640 ? 10 : 13 },
-                                borderColor: '#22c55e',
+                                borderColor: '#3b82f6',
                                 borderWidth: 1,
                                 cornerRadius: 8,
                                 displayColors: false,
@@ -1154,7 +1169,7 @@
                         const statusBadge = studentCells[5].querySelector("span"); // Status is in cell index 5
                         if (statusBadge) {
                             statusBadge.textContent = "Aktiv";
-                            statusBadge.className = "px-2 py-1 rounded-full bg-green-50 text-green-700 text-xs";
+                            statusBadge.className = "px-2 py-1 rounded-full bg-blue-50 text-blue-700 text-xs";
                         }
                     }
                 });
@@ -1237,6 +1252,152 @@
                 activeRow = null;
                 currentTableType = null;
             }
+
+            // Function to filter and show students by admin name
+            function showStudentsByAdmin(adminName) {
+                // Switch to student section
+                const studentSection = document.getElementById("studentSection");
+                const adminSection = document.getElementById("adminSection");
+                const dashboardSection = document.getElementById("dashboardSection");
+                
+                // Hide other sections
+                adminSection.classList.add("hidden");
+                dashboardSection.classList.add("hidden");
+                studentSection.classList.remove("hidden");
+                
+                // Update sidebar navigation
+                const sidebarNav = document.getElementById("sidebarNav");
+                sidebarNav.querySelectorAll("a").forEach((a) => {
+                    a.classList.remove("bg-blue-600", "text-white", "font-semibold");
+                    a.classList.add("text-gray-700", "hover:bg-gray-100");
+                });
+                
+                const studentNavLink = sidebarNav.querySelector('[data-target="studentSection"]');
+                if (studentNavLink) {
+                    studentNavLink.classList.add("bg-blue-600", "text-white", "font-semibold");
+                    studentNavLink.classList.remove("text-gray-700", "hover:bg-gray-100");
+                }
+                
+                // Filter students by admin name
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                let visibleCount = 0;
+                
+                studentRows.forEach((row) => {
+                    const cells = row.querySelectorAll("td");
+                    const studentAdminName = cells[4].textContent.trim(); // Admin nomi is in cell index 4
+                    
+                    if (studentAdminName === adminName) {
+                        row.style.display = "";
+                        visibleCount++;
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+                
+                // Update total count
+                const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                if (totalText) {
+                    totalText.textContent = `Jami ${visibleCount} ta student (${adminName})`;
+                }
+                
+                // Scroll to student section
+                studentSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            // Function to filter and show students by training center name
+            function showStudentsByTrainingCenter(centerName) {
+                // Get all admins with this training center
+                const adminRows = document.querySelectorAll("#adminSection .user-row");
+                const adminNames = [];
+                
+                adminRows.forEach((adminRow) => {
+                    const adminCells = adminRow.querySelectorAll("td");
+                    const adminCenterName = adminCells[4].textContent.trim(); // O'quv markaz nomi is in cell index 4
+                    
+                    if (adminCenterName === centerName) {
+                        const adminName = adminCells[1].textContent.trim(); // Ism is in cell index 1
+                        adminNames.push(adminName);
+                    }
+                });
+                
+                if (adminNames.length === 0) {
+                    alert(`"${centerName}" o'quv markaziga tegishli adminlar topilmadi`);
+                    return;
+                }
+                
+                // Switch to student section
+                const studentSection = document.getElementById("studentSection");
+                const adminSection = document.getElementById("adminSection");
+                const dashboardSection = document.getElementById("dashboardSection");
+                
+                // Hide other sections
+                adminSection.classList.add("hidden");
+                dashboardSection.classList.add("hidden");
+                studentSection.classList.remove("hidden");
+                
+                // Update sidebar navigation
+                const sidebarNav = document.getElementById("sidebarNav");
+                sidebarNav.querySelectorAll("a").forEach((a) => {
+                    a.classList.remove("bg-blue-600", "text-white", "font-semibold");
+                    a.classList.add("text-gray-700", "hover:bg-gray-100");
+                });
+                
+                const studentNavLink = sidebarNav.querySelector('[data-target="studentSection"]');
+                if (studentNavLink) {
+                    studentNavLink.classList.add("bg-blue-600", "text-white", "font-semibold");
+                    studentNavLink.classList.remove("text-gray-700", "hover:bg-gray-100");
+                }
+                
+                // Filter students by admin names
+                const studentRows = document.querySelectorAll("#studentSection .student-row");
+                let visibleCount = 0;
+                
+                studentRows.forEach((row) => {
+                    const cells = row.querySelectorAll("td");
+                    const studentAdminName = cells[4].textContent.trim(); // Admin nomi is in cell index 4
+                    
+                    if (adminNames.includes(studentAdminName)) {
+                        row.style.display = "";
+                        visibleCount++;
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+                
+                // Update total count
+                const totalText = document.querySelector("#studentSection .flex.items-center.justify-between.mt-3 p");
+                if (totalText) {
+                    totalText.textContent = `Jami ${visibleCount} ta student (${centerName})`;
+                }
+                
+                // Scroll to student section
+                studentSection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+
+            // Attach click event listeners to admin names and training center names
+            document.querySelectorAll("#adminSection .user-row").forEach((row) => {
+                const cells = row.querySelectorAll("td");
+                const adminNameCell = cells[1]; // Ism column
+                const centerNameCell = cells[4]; // O'quv markaz nomi column
+                
+                // Make admin name clickable
+                adminNameCell.style.cursor = "pointer";
+                adminNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                adminNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const adminName = adminNameCell.textContent.trim();
+                    showStudentsByAdmin(adminName);
+                });
+                
+                // Make training center name clickable
+                centerNameCell.style.cursor = "pointer";
+                centerNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                centerNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const centerName = centerNameCell.textContent.trim();
+                    showStudentsByTrainingCenter(centerName);
+                });
+            });
 
             // Attach event listeners to edit buttons in admin table
             document.querySelectorAll("#adminSection .editUserBtn").forEach((btn) => {
@@ -1332,14 +1493,14 @@
                     const statusBadge = cells[7].querySelector("span");
                     if (statusBadge) {
                         statusBadge.textContent = finalStatus;
-                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${finalStatus === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${finalStatus === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600"}`;
                     }
                     
                     // Update edit button color based on status
                     const editButton = cells[11].querySelector(".editUserBtn");
                     if (editButton) {
                         if (finalStatus === "Aktiv") {
-                            editButton.className = "editUserBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700";
+                            editButton.className = "editUserBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700";
                         } else {
                             editButton.className = "editUserBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700";
                         }
@@ -1371,7 +1532,7 @@
                     const statusBadge = cells[5].querySelector("span");
                     if (statusBadge) {
                         statusBadge.textContent = status;
-                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600"}`;
+                        statusBadge.className = `px-2 py-1 rounded-full text-xs ${status === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600"}`;
                     }
                     
                     // Update created date
@@ -1499,8 +1660,8 @@
                 newRow.setAttribute("data-id", newId);
                 
                 const today = new Date().toISOString().split('T')[0];
-                const statusClass = status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600";
-                const editButtonClass = status === "Aktiv" ? "bg-green-600 hover:bg-green-700" : "bg-blue-600 hover:bg-blue-700";
+                const statusClass = status === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600";
+                const editButtonClass = status === "Aktiv" ? "bg-blue-600 hover:bg-blue-700" : "bg-blue-600 hover:bg-blue-700";
                 
                 newRow.innerHTML = `
                     <td class="px-2 md:px-4 py-2 text-gray-700">${newId}</td>
@@ -1534,6 +1695,29 @@
                             totalText.textContent = `Jami ${remainingRows} ta admin`;
                         }
                     }
+                });
+                
+                // Attach click event listeners to admin name and training center name
+                const cells = newRow.querySelectorAll("td");
+                const adminNameCell = cells[1]; // Ism column
+                const centerNameCell = cells[4]; // O'quv markaz nomi column
+                
+                // Make admin name clickable
+                adminNameCell.style.cursor = "pointer";
+                adminNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                adminNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const adminName = adminNameCell.textContent.trim();
+                    showStudentsByAdmin(adminName);
+                });
+                
+                // Make training center name clickable
+                centerNameCell.style.cursor = "pointer";
+                centerNameCell.classList.add("hover:text-blue-600", "hover:underline", "transition-colors");
+                centerNameCell.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const centerName = centerNameCell.textContent.trim();
+                    showStudentsByTrainingCenter(centerName);
                 });
                 
                 // Update total count
@@ -1572,7 +1756,7 @@
                 newRow.className = "student-row";
                 newRow.setAttribute("data-id", `s${newId}`);
                 
-                const statusClass = status === "Aktiv" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-600";
+                const statusClass = status === "Aktiv" ? "bg-blue-50 text-blue-700" : "bg-red-50 text-red-600";
                 
                 newRow.innerHTML = `
                     <td class="px-2 md:px-4 py-2 text-gray-700">${newId}</td>
@@ -1583,7 +1767,7 @@
                     <td class="px-2 md:px-4 py-2"><span class="px-2 py-1 rounded-full ${statusClass} text-xs">${status}</span></td>
                     <td class="px-2 md:px-4 py-2 text-gray-700 hidden lg:table-cell">${createdDate || ""}</td>
                     <td class="px-2 md:px-4 py-2 space-x-1 md:space-x-2">
-                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-green-600 text-white text-xs hover:bg-green-700">Tahrirlash</button>
+                        <button class="editStudentBtn px-2 md:px-3 py-1 rounded bg-blue-600 text-white text-xs hover:bg-blue-700">Tahrirlash</button>
                         <button class="deleteStudentBtn px-2 md:px-3 py-1 rounded bg-red-100 text-red-600 text-xs hover:bg-red-200">O'chirish</button>
                     </td>
                 `;
